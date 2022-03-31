@@ -12,7 +12,7 @@ and
 
     roslaunch ar_test test.launch
 
-You will need the cube with the fiducials as well, printed and assembled.
+You will need the cube with the fiducials as well, printed and assembled. The file is ar_cube.png, courtesy of [Ishijima Electronics](http://ishi.main.jp/ros/ros_ar_bundle.html).
 
 ## Fix quaternions TF republisher:
 
