@@ -7,7 +7,8 @@
 
 	<!-- node pkg="tf" type="static_transform_publisher" name="camera_link_broadcaster" args="0 0 1 0 0 0 1 map usb_cam 100" / -->
 	<!-- node pkg="tf" type="static_transform_publisher" name="camera_link_broadcaster" args="0 0 1 1.570796325 0  1.570796325 map usb_cam 100" / -->
-	<node pkg="tf" type="static_transform_publisher" name="camera_link_broadcaster" args="0 0 1 0 0 1.570796325 map usb_cam 100" />
+	<!-- node pkg="tf" type="static_transform_publisher" name="camera_link_broadcaster" args="0 0 1 0 0 1.570796325 map usb_cam 100" / -->
+	<node pkg="tf" type="static_transform_publisher" name="camera_link_broadcaster" args="0 0 1 3.14159265 3.14159265 1.570796325 map usb_cam 100" />
 
 	<arg name="marker_size" default="4.0" />
 	<arg name="max_new_marker_error" default="0.08" />
