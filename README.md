@@ -32,8 +32,30 @@ Then you have to use rqt like:
 
 ## Calibrate:
 
-If you are using a new webcame, then you need to run the opencv calibration:
+If you are using a new webcam, then you need to run the opencv calibration:
 
     rosrun camera_calibration cameracalibrator.py --size 10x7 --square 0.025 image:=/usb_cam/image_raw camera:=/usb_cam
 
 save the file and then load it into the launch file. you can copy how it was done in `usb_cal.launch` 
+
+## fixquaternions2.py
+
+use this to republish the exact same quaternion, because we fixed it in the SimpleServer when we are stacking the quaternion components
+
+- z -> +y
+- x -> +z
+- y -> +x
+
+this was a simple transformation to fix. now the paper cube, if you turn the algorithm on while it is pointed towards the screen like:
+
+- Z pointing towards screen (x)
+- Y pointing towards right ->
+- X pointing up A
+
+Then it aligns when used with OpenSimRT branch ros\_fixing\_cube v0.02.1
+
+# TODO:
+
+- fixquaternions should be parametrized
+- create launch files for fixquaternions*
+- 
