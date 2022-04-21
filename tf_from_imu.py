@@ -38,25 +38,43 @@ class ImF:
         self.p = config["double_paramp"]
         self.y = config["double_paramy"]
         
+        self.quat = tf.transformations.quaternion_from_euler(self.r, self.p, self.y)
+
         self.ix = config["bool_paramx"]
         self.iy = config["bool_paramy"]
         self.iz = config["bool_paramz"]
         
         return config
 
-    def loop_callback(self, msg):
-        orientation = (msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w)  # is a tuple
-
-        self.br.sendTransform(self.origin, orientation, rospy.Time.now(), self.tf_name, self.originalframe)
+    def loop_callback(self, msg, tf_name, fixit):
+        orientation = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]  # is a tuple
+        #order issues???
+        rospy.logdebug("orientation %s: %s"%(tf_name, orientation))
+        if fixit:
+            ori = tf.transformations.quaternion_multiply(self.quat, orientation)
+        else:
+            ori = orientation
+        
+        rospy.logdebug("ori %s: %s"%(tf_name, ori))
+        #rospy.loginfo(self.origin)
+        self.br.sendTransform(self.origin, ori, rospy.Time.now(), tf_name, self.originalframe)
 
     def publisher(self):
         rospy.init_node('tf_from_imu_publisher', anonymous=True)
-        self.origin = rospy.get_param("origin",(.1,.2,.3))
+        self.origin = tuple(rospy.get_param("~origin",(.1,.2,.3)))
         self.originalframe= rospy.get_param("ori_frame", 'map')
-        self.tf_name = rospy.get_param("tf_name",'toraxx')
+        self.tf_name = rospy.get_param("~tf_name",'toraxx')
+        self.tf_name_raw = self.tf_name + "_raw"
         self.br = tf.TransformBroadcaster()
         base_name = rospy.resolve_name("imu")
-        rospy.Subscriber(base_name + "/data", Imu, self.loop_callback )
+        
+        ##lets lambda this loopback so we don't need 2 of them.
+        loopbackraw = lambda msg : self.loop_callback(msg, self.tf_name_raw, False )
+        loopback = lambda msg : self.loop_callback(msg, self.tf_name, True )
+
+        rospy.Subscriber(base_name + "/data", Imu, loopback )
+        
+        rospy.Subscriber(base_name + "/data_raw", Imu, loopbackraw )
         srv = Server(TutorialsConfig, self.reconf_callback)
         rospy.spin()
 
