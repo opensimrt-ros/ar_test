@@ -32,7 +32,11 @@ Then you have to use rqt like:
 
 ## Calibrate:
 
-If you are using a new webcame, then you need to run the opencv calibration:
+If you are using an uncalibrated camera, such as new webcam, then you need to run the opencv calibration. You can print a calibration checkerboard pattern from [here](https://markhedleyjones.com/projects/calibration-checkerboard-collection). I got the 11x8 squares (which camera calibrator calls 10x7 because it refers to the number of vertices). If you print a different one, you will need to change the options below.
+
+This will take a while as the algorithm needs to take a bunch of different pictures of the checkerboard pattern in different distances and orientations.
+
+The run:
 
     rosrun camera_calibration cameracalibrator.py --size 10x7 --square 0.025 image:=/usb_cam/image_raw camera:=/usb_cam
 
