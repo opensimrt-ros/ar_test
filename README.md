@@ -36,6 +36,8 @@ If you are using an uncalibrated camera, such as new webcam, then you need to ru
 
 This will take a while as the algorithm needs to take a bunch of different pictures of the checkerboard pattern in different distances and orientations.
 
+You can read more about camera calibration [here](https://learnopencv.com/camera-calibration-using-opencv/):
+
 The run:
 
     rosrun camera_calibration cameracalibrator.py --size 10x7 --square 0.025 image:=/usb_cam/image_raw camera:=/usb_cam
