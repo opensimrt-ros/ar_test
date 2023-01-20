@@ -23,7 +23,7 @@ class Thing:
         self.ix = False
         self.iy = False
         self.iz = False
-        self.child_frame_id = "frame_0"
+        self.child_frame_id = "ximu3"
         self.new_frame_id = "frame_1"
         self.parent_frame_id = "map"
         self.use_quaternions = False
@@ -73,22 +73,30 @@ class Thing:
                 q_rot = tf.transformations.quaternion_from_euler(self.r, self.p, self.y);
             
             try:
+            #if (True):
+                #(trans,rot) = listener.lookupTransform(self.child_frame_id, self.parent_frame_id, rospy.Time(0))
                 (trans,rot) = listener.lookupTransform(self.parent_frame_id, self.child_frame_id, rospy.Time(0))
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                
                 continue
 
             #print(self.r,self.p,self.y)
             #print(rot)
                          #tf.transformations.quaternion_from_euler(0, 0, msg.theta),
+            #newrot = tf.transformations.quaternion_inverse(rot)
             newrot = rot
+            q_roti = tf.transformations.quaternion_inverse(q_rot)
             newrot[0] = -rot[0] if self.ix else rot[0]
             newrot[1] = -rot[1] if self.iy else rot[1]
             newrot[2] = -rot[2] if self.iz else rot[2]
 
-            q_new = tf.transformations.quaternion_multiply(q_rot, newrot)
+            q_new = tf.transformations.quaternion_multiply(rot,q_rot)
+            #q_new = rot
             #q_new = [-rot[0],-rot[1],-rot[2],rot[3], ]
-            
-            br.sendTransform((0.5, 0.5, 0), q_new, rospy.Time.now(), self.parent_frame_id, self.new_frame_id)
+            #print(q_new)
+            #br.sendTransform((0.5, 0.5, 0), q_new, rospy.Time.now(), self.parent_frame_id, self.new_frame_id)
+            br.sendTransform((0.5, 0.5, 0), (0,0,0,1), rospy.Time.now(), self.new_frame_id+"_transl", self.parent_frame_id)
+            br.sendTransform((0, 0, 0), q_new, rospy.Time.now(), self.new_frame_id, self.new_frame_id+"_transl")
 
             rate.sleep()
 
