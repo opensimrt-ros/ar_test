@@ -54,6 +54,8 @@ CATKIN_IGNORE
 *.aux
 *.bbl
 *.blg
+*.log
+*.bcf
 *.fdb_latexmk
 *.out
 *.run.xml
