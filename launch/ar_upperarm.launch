@@ -15,61 +15,20 @@
 	<arg name="cam_image_topic" default="/usb_cam/image_raw" />
 	<arg name="cam_info_topic" default="/usb_cam/camera_info" />
 	<arg name="output_frame" default="/usb_cam" />
-	<!-- arg name="bundle_files" default="$(find ar_test)/bundles/torax.xml $(find ar_test)/bundles/upper_arm.xml $(find ar_test)/bundles/forearm.xml" / -->
+	<arg name="bundle_files" default="$(find ar_test)/bundles/torax.xml $(find ar_test)/bundles/upper_arm.xml $(find ar_test)/bundles/forearm.xml" />
 
-	<group ns="torax">
-		<!-- TODO:I don't know a way to change individual marker sizes for each bundle, so here we will have one node per bundle. This is less than ideal-->
-		<arg name="marker_size" default="1.0" />
-		<arg name="bundle_file" default="$(find ar_test)/bundles/torax.xml" />
-		<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" >
-			<param name="marker_size" value="$(arg marker_size)"/>
-			<param name="max_new_marker_error" value="$(arg max_new_marker_error)"/>
-			<param name="max_track_error" value="$(arg max_track_error)"/>
-			<param name="max_frequency" value="8.0"/>
-			<param name="marker_resolution" value="5"/>
-			<param name="marker_margin" value="2"/>
-			<param name="bundle_files" value="$(arg bundle_file)"/>
-			<param name="output_frame" value="$(arg output_frame)"/>
-			<remap from="camera_image" to="$(arg cam_image_topic)"/>
-			<remap from="camera_info" to="$(arg cam_info_topic)"/>
-		</node> 
-
-
-	</group>
-	<group ns="upperarm">
-
-		<!-- TODO:I don't know a way to change individual marker sizes for each bundle, so here we will have one node per bundle. This is less than ideal-->
-		<arg name="marker_size" default="1.0" />
-		<arg name="bundle_file" default="$(find ar_test)/bundles/upper_arm.xml" />
-		<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" >
-			<param name="marker_size" value="$(arg marker_size)"/>
-			<param name="max_new_marker_error" value="$(arg max_new_marker_error)"/>
-			<param name="max_track_error" value="$(arg max_track_error)"/>
-			<param name="max_frequency" value="8.0"/>
-			<param name="marker_resolution" value="5"/>
-			<param name="marker_margin" value="2"/>
-			<param name="bundle_files" value="$(arg bundle_file)"/>
-			<param name="output_frame" value="$(arg output_frame)"/>
-			<remap from="camera_image" to="$(arg cam_image_topic)"/>
-			<remap from="camera_info" to="$(arg cam_info_topic)"/>
-		</node> 
-	</group>
-	<group ns="forearm">
-		<!-- TODO:I don't know a way to change individual marker sizes for each bundle, so here we will have one node per bundle. This is less than ideal-->
-		<arg name="marker_size" default="1.0" />
-		<arg name="bundle_file" default="$(find ar_test)/bundles/forearm.xml" />
-		<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" >
-			<param name="marker_size" value="$(arg marker_size)"/>
-			<param name="max_new_marker_error" value="$(arg max_new_marker_error)"/>
-			<param name="max_track_error" value="$(arg max_track_error)"/>
-			<param name="max_frequency" value="8.0"/>
-			<param name="marker_resolution" value="5"/>
-			<param name="marker_margin" value="2"/>
-			<param name="bundle_files" value="$(arg bundle_file)"/>
-			<param name="output_frame" value="$(arg output_frame)"/>
-			<remap from="camera_image" to="$(arg cam_image_topic)"/>
-			<remap from="camera_info" to="$(arg cam_info_topic)"/>
-		</node> 
-	</group>
+	<arg name="marker_size" default="1.0" />
+	<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" >
+		<param name="marker_size" value="$(arg marker_size)"/>
+		<param name="max_new_marker_error" value="$(arg max_new_marker_error)"/>
+		<param name="max_track_error" value="$(arg max_track_error)"/>
+		<param name="max_frequency" value="8.0"/>
+		<param name="marker_resolution" value="5"/>
+		<param name="marker_margin" value="2"/>
+		<param name="bundle_files" value="$(arg bundle_files)"/>
+		<param name="output_frame" value="$(arg output_frame)"/>
+		<remap from="camera_image" to="$(arg cam_image_topic)"/>
+		<remap from="camera_info" to="$(arg cam_info_topic)"/>
+	</node> 
 </launch>
 
