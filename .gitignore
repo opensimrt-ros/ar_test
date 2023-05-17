@@ -51,6 +51,7 @@ qtcreator-*
 CATKIN_IGNORE
 
 # Latex stuff
+*.fls
 *.aux
 *.bbl
 *.blg
