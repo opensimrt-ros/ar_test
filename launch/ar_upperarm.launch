@@ -19,6 +19,7 @@
 
 	<arg name="marker_size" default="1.0" />
 	<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" >
+		<rosparam param="proper_names" >['ar/thorax','ar/humerus','ar/radius']</rosparam>
 		<param name="marker_size" value="$(arg marker_size)"/>
 		<param name="max_new_marker_error" value="$(arg max_new_marker_error)"/>
 		<param name="max_track_error" value="$(arg max_track_error)"/>
