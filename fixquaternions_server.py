@@ -28,6 +28,6 @@ if __name__ == '__main__':
         rospy.init_node('pose_publisher_updater')
         srv = Server(TutorialsConfig, callback)
         rospy.spin()
-    except rospy:
+    except rospy.ROSInterruptException:
         pass
 

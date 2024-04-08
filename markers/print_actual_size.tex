@@ -56,6 +56,10 @@ sorting=ynt
 ]{biblatex}
 \addbibresource{bib.bib}
 
+\fboxsep=20mm%padding thickness
+\fboxrule=1pt%border thickness
+
+
 \title{\textbf{Upperbody single arm AR markers example }
 }
 \author{ Frederico B. Klein }
@@ -91,7 +95,7 @@ Markers are generated using the script from ar\_track\_alvar with:
 %TORAX:
 \begin{Marker}{TORAX}
     \centering
-    \includegraphics[width=13cm]{MarkerData_0}
+    \fbox{\includegraphics[width=13cm]{MarkerData_0}}
 \end{Marker}
 
 %\includegraphics[width=10cm]{MarkerData_0.png}
@@ -101,7 +105,7 @@ Markers are generated using the script from ar\_track\_alvar with:
 %UPPERARM:\\
 \begin{Marker}{UPPERARM}
     \centering
-    \includegraphics[width=13cm]{MarkerData_2}
+    \fbox{\includegraphics[width=12cm]{MarkerData_2}}
 \end{Marker}
 %\includegraphics[width=10cm]{MarkerData_3.png}
 %\includegraphics[width=10cm]{MarkerData_4.png}
@@ -110,7 +114,7 @@ Markers are generated using the script from ar\_track\_alvar with:
 %FOREARM:\\
 \begin{Marker}{FOREARM}
     \centering
-    \includegraphics[width=9cm]{MarkerData_6}
+    \fbox{\includegraphics[width=8cm]{MarkerData_6}}
 \end{Marker}
 %\includegraphics[width=10cm]{MarkerData_7.png}
 %\includegraphics[width=10cm]{MarkerData_8.png}
